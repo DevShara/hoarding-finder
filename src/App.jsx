@@ -1,10 +1,11 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
+import "./styles/index.css"
 
 const App = () => {
   return (
     <>
-      <h1>RENDERED</h1>
+      <h1 className=" text-center">RENDERED</h1>
     </>
   );
 };
