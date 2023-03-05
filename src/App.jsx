@@ -1,13 +1,13 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-
 import SearchPanel from "./components/searchPanel";
+import Results from "./components/Results";
 
 const App = () => {
   return (
     <>
       < SearchPanel />
-      <h1 className="text-3xl bg-gray-300">asdasd</h1>
+      <Results />
     </>
   );
 };
