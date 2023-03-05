@@ -1,11 +1,13 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import "./styles/index.css"
+
+import SearchPanel from "./components/searchPanel";
 
 const App = () => {
   return (
     <>
-      <h1 className=" text-center">RENDERED</h1>
+      < SearchPanel />
+      <h1 className="text-3xl bg-gray-300">asdasd</h1>
     </>
   );
 };
