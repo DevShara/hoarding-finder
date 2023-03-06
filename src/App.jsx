@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import SearchPanel from "./components/searchPanel";
 import Results from "./components/Results";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import Details from "./components/Details";
 
 const App = () => {
 
@@ -32,9 +33,12 @@ const App = () => {
 
   return (
     <BrowserRouter >
+      <header className="   text-green-700 text-center p-3 ">
+        <button className=" border-green-700 font-bold text-xl border-2  py-2 px-3 rounded-sm mx-auto"><Link to="/">HOARDING FINDER</Link></button>
+      </header>
       <Routes>
         <Route path="/" element={[< SearchPanel key={'el1'} />, <Results key={'el2'} hoardings={hoardings} />]}>   </Route>
-
+        <Route path="details/:id" element={<Details />}></Route>
       
         
       </Routes>
