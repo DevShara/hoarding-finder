@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import SearchPanel from "./components/searchPanel";
 import Results from "./components/Results";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const App = () => {
 
@@ -30,10 +31,14 @@ const App = () => {
   }
 
   return (
-    <>
-      < SearchPanel />
-      <Results hoardings={hoardings} />
-    </>
+    <BrowserRouter >
+      <Routes>
+        <Route path="/" element={[< SearchPanel key={'el1'} />, <Results key={'el2'} hoardings={hoardings} />]}>   </Route>
+
+      
+        
+      </Routes>
+    </BrowserRouter>
   );
 };
 
