@@ -2,13 +2,23 @@ import { useEffect } from "react";
 import Hoarding from "./Hoarding";
 import "../styles/index.css"
 
-const Results = () => {
+const Results = ({hoardings}) => {
 
-    const hoarding = {location:"Gettuwana", Size:"80x20", route:"Kandy Kurunegala Rd", isAvailable:false};
+
+    if(hoardings.length == 0) {
+        return(
+            <h1>NO RESULTS FOUND</h1>
+        )
+    }
+
 
     return(
         <ul className=" container mx-auto">
-        <Hoarding hoarding={hoarding} />
+           { hoardings.map(hoarding => {
+                return(
+                    <Hoarding key={hoarding._id} hoarding={hoarding} />
+                )
+            })}
         </ul>
     )
 }
