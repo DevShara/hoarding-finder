@@ -1,6 +1,6 @@
 import "../styles/index.css"
 
-const SearchPanel = ({reRenderHoardings}) => {
+const SearchPanel = ({searchHoardings}) => {
     return(
       <div className="bg-gray-600" >
           <div className="container text-white  md:w-1/3 mx-auto p-8 flex flex-col gap-4 justify-center items-center">
@@ -9,8 +9,12 @@ const SearchPanel = ({reRenderHoardings}) => {
             
               className="w-full flex flex-col gap-4"
               onSubmit={(e) => {
-                e.preventDefault()
-                reRenderHoardings()
+                e.preventDefault();
+
+                const formData = {location:e.target.location.value, city:e.target.city.value, route:e.target.route.value }
+                searchHoardings(formData)
+              
+
               }}
             
             >
@@ -22,11 +26,11 @@ const SearchPanel = ({reRenderHoardings}) => {
               <label htmlFor="city" >
                 City
                 <select name="city" id="city" className="w-full mt-1 text-gray-600" >
-                  <option value="">Kurunegala</option>
-                  <option value="">Kandy</option>
-                  <option value="">Colombo</option>
-                  <option value="">Katugastota</option>
-                  <option value="">Matale</option>
+                  <option value="Kurunegala">Kurunegala</option>
+                  <option value="Kandy">Kandy</option>
+                  <option value="Mawathagama">Mawathagama</option>
+                  <option value="Katugastota">Katugastota</option>
+                  <option value="Matale">Matale</option>
                 </select>
               </label>
 
@@ -34,8 +38,8 @@ const SearchPanel = ({reRenderHoardings}) => {
               <label htmlFor="route">
                 Route
                 <select name="route" className="w-full mt-1 text-gray-600"  id="">
-                    <option value="">Kurunegala Kandy Road</option>
-                    <option value="">Kurunegala Colombo Road</option>
+                    <option value="Kandy Kurunegala Rd">Kandy Kurunegala Rd</option>
+                    <option value="Kurunegala Colombo Road">Kurunegala Colombo Road</option>
                     
                 </select>
               </label>

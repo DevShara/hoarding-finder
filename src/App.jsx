@@ -11,40 +11,44 @@ const App = () => {
   const [city, setCity] = useState('Mawathagama');
   const [route, setRoute] = useState('Kandy Kurunegala Rd');
 
-  const [isSearch, setIsSearch] = useState(false);
+  const [query, setQuery] = useState(`*[_type == "hoarding"]`)
 
-  const [hoardings, setHoardings] = useState([]) 
+  const [hoardings, setHoardings] = useState()
+  
+  console.log('hoardings')
+
 
   useEffect(() => {
     fetchHoardings()
-  },[])
+  },[query])
 
   async function fetchHoardings(){
     let PROJECT_ID = "11j4bpx0";
     let DATASET = "production";
-    let QUERY = '';
 
-    isSearch
-      ? 
-      QUERY = encodeURIComponent('*[location == "Mawathagama" && city == "Mawathagama" && route == "Kandy Kurunegala Rd"]')
-      :
-      QUERY = encodeURIComponent('*[_type == "hoarding"]');
+      // QUERY = encodeURIComponent(`*[location == "Mawathagama" && city == "Mawathagama" && route == "Kandy Kurunegala Rd"]`)
 
-
-    let URL = `https://${PROJECT_ID}.api.sanity.io/v2021-10-21/data/query/${DATASET}?query=${QUERY}`;
+    let URL = `https://${PROJECT_ID}.api.sanity.io/v2021-10-21/data/query/${DATASET}?query=${encodeURIComponent(query)}`;
 
     const apiRes = await fetch(URL);
     const res = await apiRes.json();
 
+    // setHoardings(() => {
+    //   return(null)
+    // })
     setHoardings(res.result);
+
   }
 
-  function reRenderHoardings(){
-    !isSearch ? setIsSearch(true): null
+  function searchHoardings(formData){
+  
+    console.log(formData)
 
-    console.log(isSearch)
+    const city = formData.city;
+    const location = formData.location;
+    const route = formData.route;
 
-    fetchHoardings();
+    setQuery(`*[location == "${location}" && city == "${city}" && route == "${route}"]`)
   }
 
   return (
@@ -53,7 +57,7 @@ const App = () => {
         <button className=" border-green-700 font-bold text-xl border-2  py-2 px-3 rounded-sm mx-auto"><Link to="/">HOARDING FINDER</Link></button>
       </header>
       <Routes>
-        <Route path="/" element={[< SearchPanel key={'el1'} reRenderHoardings={reRenderHoardings} />, <Results key={'el2'} hoardings={hoardings} />]}>   </Route>
+        <Route path="/" element={[< SearchPanel key={'el1'} searchHoardings={searchHoardings}  />, <Results key={'el2'} hoardings={hoardings} />]}>   </Route>
         <Route path="details/:id" element={<Details />}></Route>
       
         
