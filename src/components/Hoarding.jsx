@@ -2,7 +2,6 @@ import "../styles/index.css"
 import { Link } from "react-router-dom"
 
 const Hoarding = ({hoarding}) => {
-    console.log(hoarding)
     return(
         <li className="  border  ">
             <Link to={`/details/${hoarding._id}`}>

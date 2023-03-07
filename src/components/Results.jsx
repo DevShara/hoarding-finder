@@ -13,7 +13,7 @@ const Results = ({hoardings}) => {
 
 
     return(
-        <ul className="  mx-auto">
+        <ul className=" mx-auto">
            { hoardings.map(hoarding => {
                 return(
                     <Hoarding key={hoarding._id} hoarding={hoarding} />
