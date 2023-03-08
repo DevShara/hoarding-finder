@@ -1,16 +1,23 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "../styles/index.css";
+import fetchRouteList from "./fetchRouteList";
 
 
 let CITIES ;
+let ROUTES ;
 
 const SearchPanel = ({searchHoardings}) => {
 
+    const [selCity, setSelCity] = useState('');
+
+    ROUTES = fetchRouteList(selCity);
+  
+
     useEffect(() => {
-      getCityList()
+      fetchCityList()
     }, []);
 
-    async function getCityList(){
+    async function fetchCityList(){
       let PROJECT_ID = "11j4bpx0";
       let DATASET = "production";
     
@@ -18,7 +25,7 @@ const SearchPanel = ({searchHoardings}) => {
   
       const apiRes = await fetch(URL);
       const res = await apiRes.json();
-  
+      
      
       CITIES = res.result
 
@@ -50,8 +57,17 @@ const SearchPanel = ({searchHoardings}) => {
 
               <label htmlFor="city" >
                 City
-                <select name="city" id="city" className="w-full mt-1 text-gray-600" >
+                <select 
+                  name="city" id="city" className="w-full mt-1 text-gray-600"
+                  onChange={(e) => {
+                    setSelCity(e.target.value);
+                    
+                   
+                  }}
+                
+                >
 
+                  <option></option>
 
                   { CITIES &&
                     CITIES.map(hoarding => {
@@ -67,8 +83,13 @@ const SearchPanel = ({searchHoardings}) => {
               <label htmlFor="route">
                 Route
                 <select name="route" className="w-full mt-1 text-gray-600"  id="">
-                    <option value="Kandy Kurunegala Rd">Kandy Kurunegala Rd</option>
-                    <option value="Kurunegala Colombo Road">Kurunegala Colombo Road</option>
+                  { ROUTES &&
+                    ROUTES.map(route => {
+                      return(
+                        <option key={route} value={route}>{route}</option>
+                      )
+                    })
+                  }  
                     
                 </select>
               </label>
