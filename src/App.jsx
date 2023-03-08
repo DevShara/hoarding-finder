@@ -57,7 +57,7 @@ const App = () => {
         <button className=" border-green-700 font-bold text-xl border-2  py-2 px-3 rounded-sm mx-auto"><Link to="/">HOARDING FINDER</Link></button>
       </header>
       <Routes>
-        <Route path="/" element={[< SearchPanel key={'el1'} searchHoardings={searchHoardings}  />, <Results key={'el2'} hoardings={hoardings} />]}>   </Route>
+        <Route path="/" element={[< SearchPanel key={'el1'}  searchHoardings={searchHoardings}  />, <Results key={'el2'} hoardings={hoardings} />]}>   </Route>
         <Route path="details/:id" element={<Details />}></Route>
       
         

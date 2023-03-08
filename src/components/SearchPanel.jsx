@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import "../styles/index.css";
-import fetchRouteList from "./fetchRouteList";
+import useRouteList from "./useRouteList";
 
 
-let CITIES ;
-let ROUTES ;
+
 
 const SearchPanel = ({searchHoardings}) => {
 
+    const [cityList, setCityList] = useState([]) 
     const [selCity, setSelCity] = useState('');
 
-    ROUTES = fetchRouteList(selCity);
+    const routes = useRouteList(selCity);
   
 
     useEffect(() => {
@@ -25,11 +25,16 @@ const SearchPanel = ({searchHoardings}) => {
   
       const apiRes = await fetch(URL);
       const res = await apiRes.json();
-      
      
-      CITIES = res.result
+      const cities = []
 
-      console.log(CITIES);
+      res.result.forEach(hoarding => {
+        if(!cities.includes(hoarding.city)){
+          cities.push(hoarding.city)
+        }
+      })
+
+      setCityList(cities)
   
     }
 
@@ -60,8 +65,7 @@ const SearchPanel = ({searchHoardings}) => {
                 <select 
                   name="city" id="city" className="w-full mt-1 text-gray-600"
                   onChange={(e) => {
-                    setSelCity(e.target.value);
-                    
+                    setSelCity(e.target.value);                
                    
                   }}
                 
@@ -69,11 +73,12 @@ const SearchPanel = ({searchHoardings}) => {
 
                   <option></option>
 
-                  { CITIES &&
-                    CITIES.map(hoarding => {
+                  { cityList &&
+                    cityList.map(city => {
                       return(
-                        <option key={hoarding.city} value={hoarding.city}>{hoarding.city}</option>
+                        <option key={city} value={city}>{city}</option>
                       )
+                      
                     })
                   }                 
                 </select>
@@ -83,8 +88,9 @@ const SearchPanel = ({searchHoardings}) => {
               <label htmlFor="route">
                 Route
                 <select name="route" className="w-full mt-1 text-gray-600"  id="">
-                  { ROUTES &&
-                    ROUTES.map(route => {
+                  <option value=""></option>
+                  { routes &&
+                    routes.map(route => {
                       return(
                         <option key={route} value={route}>{route}</option>
                       )
