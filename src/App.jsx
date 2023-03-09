@@ -7,11 +7,10 @@ import Details from "./components/Details";
 
 const App = () => {
 
-  const [location, setLocation] = useState('Mawathagama')
-  const [city, setCity] = useState('Mawathagama');
-  const [route, setRoute] = useState('Kandy Kurunegala Rd');
 
   const [query, setQuery] = useState(`*[_type == "hoarding"]`)
+
+  const [status, setStatus] = useState('');
 
   const [hoardings, setHoardings] = useState()
   
@@ -23,6 +22,9 @@ const App = () => {
   },[query])
 
   async function fetchHoardings(){
+
+    setStatus('loading')
+
     let PROJECT_ID = "11j4bpx0";
     let DATASET = "production";
 
@@ -38,11 +40,12 @@ const App = () => {
     // })
     setHoardings(res.result);
 
+    setStatus('loaded')
+
+
   }
 
   function searchHoardings(formData){
-  
-    console.log(formData)
 
     const city = formData.city;
     const location = formData.location;
@@ -57,7 +60,7 @@ const App = () => {
         <button className=" border-green-700 font-bold text-xl border-2  py-2 px-3 rounded-sm mx-auto"><Link to="/">HOARDING FINDER</Link></button>
       </header>
       <Routes>
-        <Route path="/" element={[< SearchPanel key={'el1'}  searchHoardings={searchHoardings}  />, <Results key={'el2'} hoardings={hoardings} />]}>   </Route>
+        <Route path="/" element={[< SearchPanel key={'el1'}  searchHoardings={searchHoardings}  />, <Results key={'el2'} status={status} hoardings={hoardings} />]}>   </Route>
         <Route path="details/:id" element={<Details />}></Route>
       
         
