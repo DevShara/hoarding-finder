@@ -37,8 +37,12 @@ const Details = () => {
     }
 
     return(
-        <div className=" container flex flex-row justify-center p-5">
-            <h2 className=" text-xl">{hoarding.location} - {hoarding.size}  - {hoarding.route}</h2>
+        <div className=" relative container mx-auto flex flex-col w-full justify-center items-center p-5">
+            {
+                //TODO: hide sanity project id and dataset from the frontend (this is not for permanant)
+                hoarding.image && <img className="  rounded-md  object-cover w-3/4" src={`https://cdn.sanity.io/images/11j4bpx0/production/${hoarding.image.asset._ref.substr(6,48)}.jpg`} alt="" />}
+                <div className={ ` absolute top-0  text-sm p-2 border-2 font-bold ${hoarding.isAvailable ? "  bg-lime-700 text-lime-100   " : "  bg-red-700 text-red-100 "}  `}>{hoarding.isAvailable ? " Available" : " Not Available"}</div>
+                <h2 className=" text-xl">{hoarding.location} - {hoarding.size}  - {hoarding.route}</h2>
         </div>
     )
 }
