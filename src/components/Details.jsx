@@ -37,14 +37,37 @@ const Details = () => {
     }
 
     return(
-        <div className=" relative container mx-auto flex flex-col w-full justify-center items-center p-5">
+        <div className=" relative container mx-auto flex gap-6 flex-col w-full justify-center items-center p-5">
             {
                 //TODO: hide sanity project id and dataset from the frontend (this is not for permanant)
-                hoarding.image && <img className="  rounded-md  object-cover w-3/4" src={`https://cdn.sanity.io/images/11j4bpx0/production/${hoarding.image.asset._ref.substr(6,48)}.jpg`} alt="" />}
+                hoarding.image && <img className="  rounded-xl  object-cover w-3/4" src={`https://cdn.sanity.io/images/11j4bpx0/production/${hoarding.image.asset._ref.substr(6,48)}.jpg`} alt="" />}
                 <div className={ ` absolute top-0  text-sm p-2 border-2 font-bold ${hoarding.isAvailable ? "  bg-lime-700 text-lime-100   " : "  bg-red-700 text-red-100 "}  `}>{hoarding.isAvailable ? " Available" : " Not Available"}</div>
-                <h2 className=" text-xl">{hoarding.location} - {hoarding.size}  - {hoarding.route}</h2>
+                <table className="border-collapse border border-slate-400 w-3/4  ">
+                    <thead className="">
+                    <tr>
+                        <th class=" bg-gray-200 border border-slate-300   p-2">Location</th>
+                        <th class=" bg-gray-200 border border-slate-300 p-2">City</th>
+                        <th class=" bg-gray-200 border border-slate-300 p-2">Route</th>
+                        <th class=" bg-gray-200 border border-slate-300 p-2">Address</th>
+                        <th class=" bg-gray-200 border border-slate-300 p-2">Land Owner</th>
+                        {!hoarding.isAvailable && <th class=" bg-gray-200 border border-slate-300 p-2">Client</th> }
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="border border-slate-300  p-2">{hoarding.location}</td>
+                            <td class="border border-slate-300  p-2">{hoarding.size}</td>
+                            <td class="border border-slate-300  p-2">{hoarding.route}</td>
+                            <td class="border border-slate-300  p-2">No. 7/1, Kandy Rd, Hadeniya.</td>
+                            <td class="border border-slate-300  p-2">P.K.G.I.S. Weerasinghe</td>
+                            {!hoarding.isAvailable && <td class="border border-slate-300 p-2">HNB Bank</td> }
+
+                            
+                        </tr>
+                    </tbody>
+                </table>
         </div>
     )
-}
+}   
 
 export default Details;
