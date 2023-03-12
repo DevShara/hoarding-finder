@@ -5,7 +5,6 @@ import "../styles/index.css"
 const Results = ({hoardings, status}) => {
 
     if(status === "loading"){
-        console.log(status)
         return(
 
         <div className=" container flex flex-row justify-center  p-8">

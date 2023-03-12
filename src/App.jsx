@@ -14,7 +14,6 @@ const App = () => {
 
   const [hoardings, setHoardings] = useState()
   
-  console.log('hoardings')
 
 
   useEffect(() => {
@@ -51,7 +50,7 @@ const App = () => {
     const location = formData.location;
     const route = formData.route;
 
-    setQuery(`*[location == "${location}" && city == "${city}" && route == "${route}"]`)
+    setQuery(`*[location == "${location}" || city == "${city}" || route == "${route}"]`)
   }
 
   return (
