@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
-import SearchPanel from "./components/searchPanel";
+import SearchPanel from "./components/SearchPanel";
 import Results from "./components/Results";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Details from "./components/Details";
@@ -70,6 +70,22 @@ const App = () => {
   );
 };
 
-const container = document.getElementById("root");
-const root = createRoot(container);
-root.render(React.createElement(App));
+////////////////////////// ATTENTION ////////////////////////////
+
+//THIS IS THE WAY IT HAD BEFORE, THERE IS A ERROR WHEN RERENDER 
+// const container = document.getElementById("root");
+// const root = createRoot(container);
+// root.render(<App />)
+
+
+//THEREFORE USED THIS CODE TO SOLVE THAT ERROR: BUT I DON'T KNOW WHAT THIS ACTUALLY DOES
+let container = null;
+
+document.addEventListener('DOMContentLoaded', function(event) {
+  if (!container) {
+    container = document.getElementById('root') 
+    const root = createRoot(container)
+    root.render(<App />)
+  }
+});
+
