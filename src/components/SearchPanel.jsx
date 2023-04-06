@@ -48,16 +48,21 @@ const SearchPanel = ({searchHoardings}) => {
               onSubmit={(e) => {
                 e.preventDefault();
 
-                const formData = {location:e.target.location.value, city:e.target.city.value, route:e.target.route.value }
+                const formData = {locationId:e.target.locationId.value, locationName:e.target.locationName.value, city:e.target.city.value, route:e.target.route.value }
                 searchHoardings(formData)
               
 
               }}
             
             >
-              <label htmlFor="location">
-                Location
-                <input type="text" id="location" className=" w-full mt-1 text-gray-600" placeholder="Location" />
+              <label htmlFor="locationId">
+                Location ID
+                <input type="text" id="locationId" className=" w-full mt-1 text-gray-600" placeholder="Location ID" />
+              </label>
+
+              <label htmlFor="locationName">
+                Location Name
+                <input type="text" id="locationName" className=" w-full mt-1 text-gray-600" placeholder="Location Name" />
               </label>
 
               <label htmlFor="city" >

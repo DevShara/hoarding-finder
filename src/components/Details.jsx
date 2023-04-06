@@ -35,18 +35,14 @@ const Details = () => {
             const res = await apiRes.json();
 
             setHoarding(res.result[0]);
-               
         }
 
-       
 
     if(!hoarding){
         return(
-
-        <div className=" container flex flex-row justify-center  p-8">
-            <svg className="animate-ping h-8 w-8 rounded-full border-green-700  border-4 mr-3 ..."></svg>
-        </div>
-            
+            <div className=" container flex flex-row justify-center  p-8">
+                <svg className="animate-ping h-8 w-8 rounded-full border-green-700  border-4 mr-3 ..."></svg>
+            </div>    
         )
     }
 
@@ -83,6 +79,7 @@ const Details = () => {
                     </tbody>
                 </table>
             
+                {/* TODO: Have to remove the address if it is not nessesary */}
                {hoarding.mapLocation && hoarding.address &&
                 <MapSection location={{address: hoarding.address,lat: hoarding.mapLocation.lat, lng: hoarding.mapLocation.lng,}} zoomLevel={17} /> 
                 }

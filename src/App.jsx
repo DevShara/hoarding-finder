@@ -46,11 +46,13 @@ const App = () => {
 
   function searchHoardings(formData){
 
+    const locationId = formData.locationId;
+    const locationName = formData.locationName;
     const city = formData.city;
-    const location = formData.location;
     const route = formData.route;
 
-    setQuery(`*[location == "${location}" || city == "${city}" || route == "${route}"]`)
+    {/*TODO: Have to add locationId to the query after adding that location Id field in the CMS */}
+    setQuery(`*[location == "${locationName}" || city == "${city}" || route == "${route}"]`)
   }
 
   return (
