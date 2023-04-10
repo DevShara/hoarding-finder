@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import MapSection from './map/Map' // import the map here
 import * as Styles from '../styles/table.module.css';
+
 import {client} from '../../sanityClient';
 import imageUrlBuilder from '@sanity/image-url'
 
@@ -62,7 +63,13 @@ const Details = () => {
             {
                 
                 hoarding.image && <img className="rounded-xl  object-cover h-full max-h-screen " src={urlFor(hoarding.image).width(900).url()} alt="" />}
-                <div className={ ` absolute top-0  text-sm p-2 border-2 font-bold ${hoarding.isAvailable ? "  bg-lime-700 text-lime-100" : "  bg-red-700 text-red-100 "}  `}>{hoarding.isAvailable ? " Available" : " Not Available"}</div>
+                <span className={ `
+                     text-sm p-1 border rounded-md    absolute top-3 
+                    ${hoarding.state == "toLet" ? "  border-lime-700 bg-lime-100 text-lime-700" :
+                    hoarding.state == "display" ?  " border-red-700 bg-red-100   text-red-700" :
+                    "border-gray-700 bg-gray-100   text-gray-700"}`}>
+                        {hoarding.state == "toLet" ? "To Let"  : hoarding.state == "display" ? "Display" : "pending"}
+                </span>
                 <table className="    w-full lg:w-3/4">
                     <thead className="">
                     <tr>
@@ -77,13 +84,13 @@ const Details = () => {
                     </thead>
                     <tbody>
                         <tr>
-                            <td scope="row" data-label="Location" >{hoarding.location}</td>
-                            <td data-label="Size" >{hoarding.size}</td>
-                            <td data-label="City" >{hoarding.city}</td>
-                            <td data-label="Route" >{hoarding.route}</td>
-                            <td data-label="Address" >{hoarding.address}</td>
-                            <td data-label="Land Owner" >{hoarding.landOwner}</td>
-                            {!hoarding.isAvailable && <td data-label="Client" >{hoarding.client}</td> }
+                            <td scope="row" data-label="Location" >- {hoarding.location}</td>
+                            <td data-label="Size" >- {hoarding.size}</td>
+                            <td data-label="City" >- {hoarding.city}</td>
+                            <td data-label="Route" >- {hoarding.route}</td>
+                            <td data-label="Address" >- {hoarding.address}</td>
+                            <td data-label="Land Owner" >- {hoarding.landOwner}</td>
+                            {!hoarding.isAvailable && <td data-label="Client" >- {hoarding.client}</td> }
 
                             
                         </tr>

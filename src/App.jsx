@@ -52,8 +52,10 @@ const App = () => {
     const route = formData.route;
 
     {/*TODO: Have to add locationId to the query after adding that location Id field in the CMS */}
-    setQuery(`*[location == "${locationName}" || city == "${city}" || route == "${route}"]`)
+    setQuery(`*[locationId == "${locationId}" || locationName == "${locationName}" ||  city == "${city}" || route == "${route}"] `)
   }
+
+
 
   return (
     <BrowserRouter >
@@ -61,7 +63,7 @@ const App = () => {
         <button className=" border-green-700 font-bold text-xl border-2  py-2 px-3 rounded-sm mx-auto"><Link to="/">HOARDING FINDER</Link></button>
       </header>
       <Routes>
-        <Route path="/" element={[< SearchPanel key={'el1'}  searchHoardings={searchHoardings}  />, <Results key={'el2'} status={status} hoardings={hoardings} />]}>   </Route>
+        <Route path="/" element={[< SearchPanel key={'el1'}  searchHoardings={searchHoardings}   />, <Results key={'el2'} status={status} hoardings={hoardings} />]}>   </Route>
         <Route path="details/:id" element={<Details />}></Route>
       
         

@@ -24,13 +24,16 @@ const Results = ({hoardings, status}) => {
 
     if(status == "loaded" ){
         return(
-            <ul className=" mx-auto ">
-               { hoardings.map(hoarding => {
-                    return(
-                        <Hoarding key={hoarding._id} hoarding={hoarding} />
-                    )
-                })}
-            </ul>
+            <>
+                <p className=" mx-auto text-center my-3 text-lg text-gray-500">{hoardings.length} {hoardings.length > 1 ? "hoardings found" : "hoarding found"} </p>
+                <ul className=" md:mx-auto mx-6 ">
+                { hoardings.map(hoarding => {
+                        return(
+                            <Hoarding key={hoarding._id} hoarding={hoarding} />
+                        )
+                    })}
+                </ul>
+            </>
         )
     }
 

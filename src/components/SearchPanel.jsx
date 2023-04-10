@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import "../styles/index.css";
 import useRouteList from "./useRouteList";
-import hero from '../images/background.jpg'
+import { IoMdRefresh } from "react-icons/io";
+
 
 
 
@@ -9,6 +10,7 @@ const SearchPanel = ({searchHoardings}) => {
 
     const [cityList, setCityList] = useState([]) 
     const [selCity, setSelCity] = useState('');
+    const [validationMsg, setValidationMsg] = useState(false)
 
     const routes = useRouteList(selCity);
   
@@ -34,24 +36,37 @@ const SearchPanel = ({searchHoardings}) => {
         }
       })
 
-      setCityList(cities)
+      setCityList(cities);
   
+    }
+
+    function showValidationMsg(){
+      setValidationMsg(true)
+
+      setTimeout(() => {
+        setValidationMsg(false)
+      }, 2000)
     }
 
     return(
       <div  className="bg-[linear-gradient(to_bottom,rgba(1,104,143,0.7763480392156863),rgba(0,41,55,1)),url('../images/background.jpg')]" >
-          <div className="container text-white  md:w-1/3 mx-auto p-12 flex flex-col gap-4 justify-center items-center">
+          <div className="container relative text-white  md:w-1/3 mx-auto p-12 flex flex-col gap-4 justify-center items-center">
             <h1 className="text-white  text-left font-bold text-3xl">Search a Hoarding</h1>
+
+            {validationMsg &&<p className="text-left bg-red-700 py-1 px-2">Please fill at least 1 field to show results</p>}
+
             <form
             
               className="w-full flex flex-col gap-4"
               onSubmit={(e) => {
                 e.preventDefault();
 
-                const formData = {locationId:e.target.locationId.value, locationName:e.target.locationName.value, city:e.target.city.value, route:e.target.route.value }
-                searchHoardings(formData)
-              
-
+                const formData = {locationId:e.target.locationId.value.toUpperCase(), locationName:e.target.locationName.value, city:e.target.city.value, route:e.target.route.value }
+                if(formData.locationId == "" && formData.locationName == "" && formData.city == ""){
+                  showValidationMsg();
+                }else{
+                  searchHoardings(formData)
+                }
               }}
             
             >
@@ -59,6 +74,8 @@ const SearchPanel = ({searchHoardings}) => {
                 Location ID
                 <input type="text" id="locationId" className=" w-full mt-1 text-gray-600" placeholder="Location ID" />
               </label>
+
+              <p className="text-center font-bold">OR</p>
 
               <label htmlFor="locationName">
                 Location Name
@@ -104,10 +121,18 @@ const SearchPanel = ({searchHoardings}) => {
                     
                 </select>
               </label>
+                
+                <div className="flex gap-3">
+              <button className=" bg-green-600  hover:bg-green-700  transition-all p-3 w-3/4">Search</button>
+             <button className="  bg-gray-500 hover:bg-gray-600 text-gray-100 transition-all p-3 w-1/4" onClick={(e) =>{
+              e.preventDefault();
+              location.reload()
+             }} >Clear</button>
 
-              <button className=" bg-green-600  hover:bg-green-700  transition-all p-3">Search</button>
-
+                </div>
             </form>
+
+              
         </div>
       </div>
     )
