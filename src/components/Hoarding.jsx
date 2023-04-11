@@ -32,7 +32,8 @@ const Hoarding = ({hoarding}) => {
                     ${hoarding.state == "toLet" ? "  border-lime-700 bg-lime-100 text-lime-700" :
                     hoarding.state == "display" ?  " border-red-700 bg-red-100   text-red-700" :
                     "border-gray-700 bg-gray-100   text-gray-700"}`}>
-                        {hoarding.state == "toLet" ? "To Let"  : hoarding.state == "display" ? "Display" : "pending"}</span>
+                        {hoarding.state == "toLet" ? "To Let"  : hoarding.state == "display" ? "Display" : "pending"}
+                </span>
             </div>
              
             </Link>

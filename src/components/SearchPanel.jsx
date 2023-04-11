@@ -50,7 +50,7 @@ const SearchPanel = ({searchHoardings}) => {
 
     return(
       <div  className="bg-[linear-gradient(to_bottom,rgba(1,104,143,0.7763480392156863),rgba(0,41,55,1)),url('../images/background.jpg')]" >
-          <div className="container relative text-white  md:w-1/3 mx-auto p-12 flex flex-col gap-4 justify-center items-center">
+          <div className="container relative text-white  lg:w-2/6 md:w-3/5 mx-auto p-12 flex flex-col gap-4 justify-center items-center">
             <h1 className="text-white  text-left font-bold text-3xl">Search a Hoarding</h1>
 
             {validationMsg &&<p className="text-left bg-red-700 py-1 px-2">Please fill at least 1 field to show results</p>}
